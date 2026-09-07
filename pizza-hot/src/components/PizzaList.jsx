@@ -26,7 +26,7 @@ export default function PizzaList() {
       <div className="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-4">
         {
           loadedPizzas.map((pizza) => (
-            <Pizza key={pizza.id} />
+            <Pizza key={pizza.id} pizza = {pizza} />
           ))
         }
       </div>
