@@ -1,0 +1,25 @@
+PizzaList.jsx
+import { useState, useEffect } from "react";
+
+export default function PizzaList() {
+
+  const [loadedPizzas, setLoadedPizzas] = useState([]);
+
+    //İlk çalıştığı anda çalışıp durması için sonsuz döngüye girmesin diye
+    useEffect(() => {
+      const getPizzas = async () => {
+        //apiye istek atıyoruz backend servisine fetch ile
+        const response = await fetch("http://localhost:3000/pizzas");
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch pizzas");
+    }
+
+    const pizzas = await response.json();
+    setLoadedPizzas(pizzas);
+
+  }
+
+  getPizzas();
+  }, []);
+}
