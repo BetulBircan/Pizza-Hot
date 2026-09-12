@@ -1,4 +1,7 @@
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 export default function Pizza({ pizza }) {
+  const { color } = useContext(ThemeContext);
   return (
     <div className="col">
       <div className="card item">
@@ -14,7 +17,7 @@ export default function Pizza({ pizza }) {
           </p>
           <div className="item-price">
             <b>{pizza.price} ₺</b>
-            <button className="btn btn-sm btn-danger">Sepete Ekle</button>
+            <button className={`btn btn-sm btn-outline-${color}`}>Sepete Ekle</button>
           </div>
         </div>
       </div>

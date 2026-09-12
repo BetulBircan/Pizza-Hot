@@ -54,3 +54,75 @@ export default function Pizza({ pizza }) {
 }
 
 dipnot : tl iconu Alt gr + t
+
+- Context Api nedir
+useState : Component içerisinde bir bilgi  ve bu uygulamayı kullanırken componet içerisindeki herhangi bir state üzerinde bir güncelleme olduğu zaman componentin tekrar render etmesi için state e ihtiyaç duyarız.
+
+Context Api
+useContext yardımı ile önceden oluşturmuş olduğum bir componenti kullanır.
+Merkezi bir noktadan bir state tanımlanır. ve bu state e veri sağlayan yapıya bağlanan bir component o state içerisinden yani o sağlayıcıdan o bilgiye ulaşıp istediği aşamada kullanacak prop drilling yapmadan. Yani parent child ilşkisi olmadan merkezi bir sağlayıcıdan en alt componente direk bağlaarak veri aktarılabilir.
+
+Context Api Tanımlama
+src/contexts/ThemeContext
+import {createContext} from "react";
+
+export const ThemeContext = createContext(); diyerek context i tanımlarız
+sonra da App.jsx de kullanırız.
+ <>
+      <ThemeContext.Provider value = {{color:"danger"}}> Provider ı tanımlamamız gerekir.Burada tanımladığımız zaman bunun altındaki header da pizzaList componenti de hepsi erişebilir.
+        <Header />
+        <div className="container my-4">
+          <PizzaList />
+        </div>
+      </ThemeContext.Provider>
+    </>
+    Mesela Hader ın bu context i kullanmasını istiyorsak Header componentinde useContext hookunu kullanırız.
+    - Header.jsx
+    import {useContext} from "react";
+import {ThemeContext} from "../contexts/ThemeContext";
+
+export default function Header() {
+  const {color} = useContext(ThemeContext); Bu ifadeyi her componentte kullanabilirz ve color a erişip istediğimiz yerde kullanırız.
+  return (
+    <header>
+      <nav
+        Burada da örneği var.
+        className={`navbar navbar-expand bg-${color} border-bottom border-body`}
+        data-bs-theme="dark"
+      >
+        <div className="container">
+          <a href="#" className="navbar-brand">
+            🍕 Pizza Hot
+          </a>
+          <button className="btn btn-dark">
+            <i className="bi bi-cart3"></i>
+            <span className="ms-2">(0)</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+Aslında burada ThemeContext.jsx e ThemeProvider tanımlayıp tek merkezden yönetebiliriz
+-ThemeContext.jsx
+import {createContext} from "react";
+
+export const ThemeContext = createContext();
+
+export default function ThemeProvider({children}) {
+    return (
+        <ThemeContext.Provider value = {{color:"dark"}}>
+            {children}
+        </ThemeContext.Provider>
+    )
+}
+
+ThemeProvieder ı App.jsx de 
+<ThemeProvider>
+burası children komponentine gelir
+        <Header />
+        <div className="container my-4">
+          <PizzaList />
+        </div>
+      </ThemeProvider> diye kullanırız ve artık bu context i her componentte kullanabilirz
