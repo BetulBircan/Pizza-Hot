@@ -126,3 +126,51 @@ burası children komponentine gelir
           <PizzaList />
         </div>
       </ThemeProvider> diye kullanırız ve artık bu context i her componentte kullanabilirz
+
+Reducer : Birçok state i tek tek yazmak yerine tek bir yerden state yazarak yönetebilme işlemidir. Bu tek bir yerden ekleyeceğim state de state i ekleme ,silme, güncelleme gibi rutin fonksiyonlar vardır. Bu fonksiyonları da daha merkezi bir noktadan yönetebilmek için reducer kullanımı yapılır.
+
+-  reducers/themeReducer
+export const themeReducer = (state, action) => {
+    switch (action.type) {
+        case "CHANGE_COLOR":
+            return {
+                ...state,
+                color: action.payload
+            }
+        case "CHANGE_MODE":
+            return {
+                ...state,
+                mode: action.payload
+            }
+        default:
+            return state;
+    }
+}
+
+- contexts/ThemeContext.jsx
+import { createContext, useState, useReducer } from "react";
+import {themeReducer} from "../reducers/themeReducer";
+
+export const ThemeContext = createContext();
+//USErEDUCER HOOK U KULLANILIR.
+export default function ThemeProvider({ children }) {
+        //STATE İN ADI      //State i güncelleyecek fonksiyon(setcOLOR(GİBİ))
+  const [state,             dispatch] = useReducer(themeReducer, { color: "primary", mode: "light" });
+
+  //fONKSİYONLAR TANIMLANIR
+  function changeColor(color) {
+    dispatch({ type: "CHANGE_COLOR", payload: color });
+  }
+
+  function changeMode(mode) {
+    dispatch({ type: "CHANGE_MODE", payload: mode });
+  }
+
+  return (
+    <ThemeContext.Provider value={{ ...state, changeColor, changeMode }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+

@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 export default function Pizza({ pizza }) {
-  const { color } = useContext(ThemeContext);
+  const { color, mode } = useContext(ThemeContext);
   return (
     <div className="col">
-      <div className="card item">
+      {/* <div className="card item"> */}
+      <div className={`card item ${mode === 'dark' ? 'bg-dark text-white border-light' : 'bg-light text-black'}`}>
         <img
           src={`http://localhost:3000/images/${pizza.image}`}
           alt={pizza.title}
