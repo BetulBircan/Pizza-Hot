@@ -3,6 +3,7 @@ import PizzaList from "./components/PizzaList";
 import ThemeSelector from "./components/ThemeSelector";
 import { useContext } from "react";
 import { ThemeContext } from "./contexts/ThemeContext";
+import Cart from "./components/Cart";
 
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <ThemeSelector />
         <div className="container my-4">
           <PizzaList />
+          <Cart />
         </div>
       </div>
     </>
