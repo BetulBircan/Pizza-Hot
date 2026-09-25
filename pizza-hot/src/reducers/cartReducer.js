@@ -32,7 +32,7 @@ export default function cartReducer(state, action) {
       const updateItems = [...state.items];
 
       if(existingItem.quantity === 1) {
-        updateItems.splice(existingItem, 1)
+        updateItems.splice(index, 1)
       } else {
         const updatedItem = {...existingItem, quantity : existingItem.quantity - 1}
         updateItems[index] = updatedItem;
