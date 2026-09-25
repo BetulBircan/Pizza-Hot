@@ -16,7 +16,9 @@ export const CartContextProvider = ({ children }) => {
   const updateCartItem = () => {};
 
   //delete cart item
-  const deleteCartItem = () => {};
+  const deleteCartItem = (id) => {
+    dispatch({type : "REMOVE_ITEM", id})
+  };
 
   //Clear all cart items
   const clearCart = () => {};
@@ -24,8 +26,8 @@ export const CartContextProvider = ({ children }) => {
   const cartContext = {
     items: cart.items,
     addItemToCart,
+    deleteCartItem,
     // updateCartItem,
-    // deleteCartItem,
     // clearCart,
   }
 
