@@ -4,6 +4,7 @@ import ThemeSelector from "./components/ThemeSelector";
 import { useContext } from "react";
 import { ThemeContext } from "./contexts/ThemeContext";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <div className="container my-4">
           <PizzaList />
           <Cart />
+          <Checkout />
         </div>
       </div>
     </>

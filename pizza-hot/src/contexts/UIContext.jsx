@@ -14,9 +14,16 @@ export function UIContextProvider({children}) {
     const hideCart = () => {
         setUIProgress("")
     }
+    const showCheckout = () => {
+        setUIProgress("checkout")
+    }
+
+    const hideCheckout = () => {
+        setUIProgress("")
+    }
 
     const uiProgressContext = {
-        uiProgress, showCart, hideCart
+        uiProgress, showCart, hideCart, showCheckout, hideCheckout
     }
 
     return(
