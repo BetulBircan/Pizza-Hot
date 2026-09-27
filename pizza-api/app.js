@@ -1,9 +1,16 @@
+const cors = require("cors")
 const bodyParser = require("body-parser");
 const express = require("express");
 const fs = require("fs/promises");
 
+const corsOptions = {
+  origin: ['http://localhost:5173'], // İzin verilen adres (Örn: React/Vite uygulamanız)
+ credentials : true,
+};
+
 const app = express();
 
+app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
@@ -38,7 +45,11 @@ app.post("/orders", async (req, res) => {
     order.customer.address === null ||
     order.customer.address.trim() === "" ||
     order.customer.city === null ||
-    order.customer.city.trim() === ""
+    order.customer.city.trim() === ""||
+    order.customer.district === null ||
+    order.customer.district.trim() === "" ||
+    order.customer.phone === null ||
+    order.customer.phone.trim() === ""
   ) {
     return res.status(400).json({
       message:
