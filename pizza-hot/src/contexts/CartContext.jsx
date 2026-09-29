@@ -12,26 +12,22 @@ export const CartContextProvider = ({ children }) => {
     dispatch({ type: "ADD_ITEM", item });
   };
 
-  //update cart items
-  const updateCartItem = () => {};
-
   //delete cart item
   const deleteCartItem = (id) => {
     dispatch({type : "REMOVE_ITEM", id})
   };
 
   //Clear all cart items
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch({type : "CLEAR_CART"})
+  };
 
   const cartContext = {
     items: cart.items,
     addItemToCart,
     deleteCartItem,
-    // updateCartItem,
-    // clearCart,
+    clearCart,
   }
-
-  console.log(cartContext);
 
   return (
     <CartContext.Provider

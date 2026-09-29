@@ -40,10 +40,8 @@ export default function cartReducer(state, action) {
       return {...state, items : updateItems}
     }
 
-    case "UPDATE_ITEM":
-      return {};
     case "CLEAR_CART":
-      return {};
+      return {...state, items : []};
 
     default:
       return state;
