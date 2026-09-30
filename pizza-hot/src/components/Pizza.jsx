@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { CartContext } from "../contexts/CartContext";
+import { UIContext } from "../contexts/UIContext";
 export default function Pizza({ pizza }) {
   const { color, mode } = useContext(ThemeContext);
   const { addItemToCart } = useContext(CartContext);
-
+  const { showAddingCartWarning } = useContext(UIContext);
   const handleAddToCart = () => {
     addItemToCart(pizza);
+    showAddingCartWarning("addingCart")
   };
 
   return (

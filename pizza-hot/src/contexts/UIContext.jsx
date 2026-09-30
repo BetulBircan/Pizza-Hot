@@ -22,8 +22,16 @@ export function UIContextProvider({children}) {
         setUIProgress("")
     }
 
+    const showAddingCartWarning = () => {
+        setUIProgress("addingCartWarning")
+    }
+
+    const hideAddingCartWarnig = () => {
+        setUIProgress("");
+    }
+
     const uiProgressContext = {
-        uiProgress, showCart, hideCart, showCheckout, hideCheckout
+        uiProgress, showCart, hideCart, showCheckout, hideCheckout, showAddingCartWarning, hideAddingCartWarnig
     }
 
     return(
